@@ -19,6 +19,8 @@ import { OKTA_CONFIG,
       } from '@okta/okta-angular';
 import myAppConfig from './config/my-app-config';
 import { CartDetailsComponent } from './components/cart-details/cart-details.component';
+import { CheckoutComponent } from './components/checkout/checkout.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 const oktaConfig = Object.assign({
   onAuthRequired: (injector) => {
@@ -33,6 +35,7 @@ const routes: Routes= [
   {path: 'login/callback', component: OktaCallbackComponent},
   {path: 'login', component: LoginComponent},
 
+  {path: 'checkout', component: CheckoutComponent},
   {path: 'cart-details', component: CartDetailsComponent},
   {path: 'products/:id', component: ProductDetailsComponent},
   {path: 'search/:keyword', component: ProductListComponent},
@@ -54,13 +57,15 @@ const routes: Routes= [
     LoginComponent,
     LoginStatusComponent,
     CartDetailsComponent,
+    CheckoutComponent,
   ],
   imports: [
     RouterModule.forRoot(routes),
     BrowserModule,
     HttpClientModule, // import httpclientmodule and on top of code add code
     NgbModule,
-    OktaAuthModule
+    OktaAuthModule,
+    ReactiveFormsModule
   ],
   providers: [ProductService, { provide: OKTA_CONFIG, useValue: oktaConfig }], // It inject service class
   bootstrap: [AppComponent]
